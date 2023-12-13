@@ -1,0 +1,5 @@
+apublic
+.next
+node_modules
+.eslintrc.json
+*.config.js
