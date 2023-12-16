@@ -1,11 +1,8 @@
-import { Button } from '@/components/ui/button';
-
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>
-        <h1>App Router</h1>
-        <Button>Click me</Button>
+        <h1>인덱스 페이지</h1>
       </div>
     </main>
   );
