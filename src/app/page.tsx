@@ -1,9 +1,9 @@
-export default function Home() {
+import Layout from '@/components/layout/Layout';
+
+export default function IndexPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
-        <h1>인덱스 페이지</h1>
-      </div>
-    </main>
+    <Layout>
+      <h1>인덱스 페이지</h1>
+    </Layout>
   );
 }

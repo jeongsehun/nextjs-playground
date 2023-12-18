@@ -25,7 +25,7 @@ const formSchema = z.object({
   }),
 });
 
-export function LoginForm() {
+export function SignInForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,7 +72,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" size="lg" className="w-full">
           로그인
         </Button>
       </form>
@@ -80,4 +80,4 @@ export function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default SignInForm;

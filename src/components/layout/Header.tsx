@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from '../ui/Button';
+import { Button } from '@/components/ui/Button';
 
 function Header() {
   return (
@@ -22,7 +22,7 @@ function Header() {
             />
           </Link>
         </div>
-        <ul className="flex items-center max-w-[400px] h-full">
+        {/* <ul className="flex items-center max-w-[400px] h-full">
           <li className="box-border flex items-center h-16 p-0 mx-3 leading-none rounded-none min-w-16">
             <Link href="/category" className="flex items-center text-sm font-normal h-[60px]">
               아이템발굴
@@ -38,11 +38,14 @@ function Header() {
               랭킹추적
             </Link>
           </li>
-        </ul>
+        </ul> */}
         <div className="ml-auto pr-[116px]">
-          <Button>
-            <Link href="/login">로그인</Link>
-          </Button>
+          <Link href="/signin">
+            <Button>로그인</Button>
+          </Link>
+          <Link className="ml-5" href="/signup">
+            <Button>회원가입</Button>
+          </Link>
         </div>
       </nav>
     </header>

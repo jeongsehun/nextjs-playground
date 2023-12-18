@@ -3,8 +3,6 @@ import { Inter as FontSans } from 'next/font/google';
 import { cn } from '@/lib/utils';
 
 import Providers from '@/app/providers';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 
 import './globals.css';
 
@@ -20,13 +18,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
