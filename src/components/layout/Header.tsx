@@ -1,8 +1,17 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAtomValue } from 'jotai';
+
+import { userInfoAtom, isLoginAtom } from '@/store/user';
+
 import { Button } from '@/components/ui/Button';
 
 function Header() {
+  const isLogin = useAtomValue(isLoginAtom);
+  const userInfo = useAtomValue(userInfoAtom);
+
   return (
     <header
       className="flex flex-col justify-around items-center w-full z-50 p-0 h-16 shadow-md min-w-[980px] sticky top-0 bg-white"
@@ -22,31 +31,22 @@ function Header() {
             />
           </Link>
         </div>
-        {/* <ul className="flex items-center max-w-[400px] h-full">
-          <li className="box-border flex items-center h-16 p-0 mx-3 leading-none rounded-none min-w-16">
-            <Link href="/category" className="flex items-center text-sm font-normal h-[60px]">
-              아이템발굴
+        {isLogin ? (
+          <div className="ml-auto pr-[116px]">
+            <Link className="ml-5" href="/mypage">
+              {userInfo?.nickname}님 {'>'}
             </Link>
-          </li>
-          <li className="box-border flex items-center h-16 p-0 mx-3 leading-none rounded-none min-w-16">
-            <Link href="/keyword" className="flex items-center text-sm font-normal h-[60px]">
-              키워드분석
+          </div>
+        ) : (
+          <div className="ml-auto pr-[116px]">
+            <Link href="/signin">
+              <Button>로그인</Button>
             </Link>
-          </li>
-          <li className="box-border flex items-center h-16 p-0 mx-3 leading-none rounded-none min-w-16">
-            <Link href="/tracking" className="flex items-center text-sm font-normal h-[60px]">
-              랭킹추적
+            <Link className="ml-5" href="/signup">
+              <Button>회원가입</Button>
             </Link>
-          </li>
-        </ul> */}
-        <div className="ml-auto pr-[116px]">
-          <Link href="/signin">
-            <Button>로그인</Button>
-          </Link>
-          <Link className="ml-5" href="/signup">
-            <Button>회원가입</Button>
-          </Link>
-        </div>
+          </div>
+        )}
       </nav>
     </header>
   );

@@ -1,10 +1,16 @@
 'use client';
 
+import qs from 'qs';
+import * as z from 'zod';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import Link from 'next/link';
-import * as z from 'zod';
-import qs from 'qs';
+import { useSetAtom } from 'jotai';
+
+import User from '@/services/user';
+
+import { userInfoAtom } from '@/store/user';
 
 import {
   Form,
@@ -31,6 +37,8 @@ const formSchema = z.object({
 });
 
 export function SignInForm() {
+  const router = useRouter();
+  const setUserInfo = useSetAtom(userInfoAtom);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,24 +56,17 @@ export function SignInForm() {
         },
       };
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: qs.stringify(params, { indices: false }),
-      });
-
-      if (!response.ok) {
+      const res = User.Login(params);
+      if (!res) {
         throw new Error('Login failed');
       }
 
-      const data = await response.json();
-      // 로그인 성공 처리, 예: 토큰 저장, 사용자 데이터 처리 등
-      console.log('Login successful:', data);
+      setUserInfo(res.data);
+      router.push('/');
     } catch (error) {
       // 로그인 실패 시 에러 처리
       console.error('Login error:', error);
+      alert('로그인에 실패했습니다.');
     }
   };
 
